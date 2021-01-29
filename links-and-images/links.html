@@ -1,0 +1,44 @@
+<!-- ACCESSING PARENTS FOLDERS
+    When you click either of those links in a web browser, it will complain that the page doesn’t exist. 
+Examining the address bar, you’ll discover that the browser is trying to load misc/links.html and misc/images.html—
+it’s looking in the wrong folder! That’s because our links are relative to the location of extras.html, 
+which lives in the misc folder.
+To fix this, we need the .. syntax. Two consecutive dots in a file path represent a pointer to the parent directory.
+This is like saying, “I know extras.html is in the misc folder. Go up a folder and look for links.html and images.html in there.”
+To navigate up through multiple directories, use multiple .. references, like so:
+../../elsewhere.html
+-->
+
+<!-- The only difference between a root-relative link and a relative one is that the former starts with a forward slash. 
+    That initial forward slash represents the root of your site. You can add more folders and files to the path after 
+    that initial slash, just like relative links. The following path will work correctly no matter where the current 
+    page is located (even in misc/extras.html)-->
+
+<!DOCTYPE html>
+
+<!-- https://developer.mozilla.org/en-US/docs/Web/HTML/Element -->
+<html lang='en'>
+    <head>
+        <meta charset='UTF-8'/>
+        <title>Links</title>
+    </head>
+    <body>
+        <h1>Links</h1>
+            
+        <p>
+        This example if about links and <a href='images.html'>images</a>.
+        </p>
+            
+        <p>
+        This particular page is about links!  There are three kinds of links:
+        </p>
+            
+        <ul>
+            <li>Absolute links, like to
+            <a href='https://developer.mozilla.org/en-US/docs/Web/HTML' target='_blank'>Mozilla Developer Network</a>, which is a very good resource for web developers.</li>
+            <li>Relative Links, like to our <a href='misc/extras.html'>extras page</a>.</li>
+              
+            <li>Root-relative links, like to our <a href='/'>home page</a> of our website, but those aren't useful to us right now.</li>
+        </ul>
+    </body>
+</html>
