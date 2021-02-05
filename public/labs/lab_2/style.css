@@ -15,7 +15,6 @@ body {
   min-width: 800px;
   margin: 0 auto;
   background-color: #6091C3;
-
 }
 
 /* || typography */
@@ -23,8 +22,6 @@ body {
 h1, h2, h3 {
   font-family: 'Cinzel Decorative', cursive;
   color: #2a2a2a;
-  font-size: 0.5em;
-  background-color: blue;
 }
 
 p, input, li {
