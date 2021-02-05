@@ -1,0 +1,51 @@
+body {
+    color: #414141; /* Dark Grey*/
+    background-color: #EEEEEE;  /* Light Grey */
+    font-size: 18px;  /* sets the base size font for the entire document */
+  }
+
+h1 {
+    font-size: 2em;  /* #em scales according to the above base size, so 
+    all h1 headers are twice the size of the base */
+}
+
+h2 {
+    -ms-flow-into: 1.6em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Helvectica", "Arial", sans-serif; /* this will try and use 
+    each font style from left to right and default to sans-serif if the 
+    user does NOT have the left-most two installed */
+    font-weight: normal;  /*  defines the 'boldness' of the text in an element */
+}
+
+ul {
+    list-style-type: circle;
+}
+
+ol {
+    list-style-type: lower-roman;
+}
+
+a{
+    text-decoration: none;  /* determines whether text is underlined or not,
+    'none' removes the default underline from all the links */
+}
+
+p {
+    text-align: left;  /* defines the alignment of the text in an HTML element,
+    other values are 'right', 'center', or 'justify'. */
+}
+
+/* (DONT do this), changes the properties of <strong> and <em>
+em {
+    font-weight: bold;
+    font-style: normal;
+  }
+  
+  strong {
+    font-weight: normal;
+    font-style: italic;
+  }
+*/

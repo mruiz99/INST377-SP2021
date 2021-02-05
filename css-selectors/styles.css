@@ -1,0 +1,414 @@
+/* CLASS SELECTORS 
+
+“Class selectors” let you apply CSS styles to a specific HTML element. 
+They let you differentiate between HTML elements of the same type, 
+like when we had two <div> elements in the previous chapter, but only 
+wanted to style one of them. Class selectors require two things:
+
+    A class attribute on the HTML element in question.
+    A matching CSS class selector in your stylesheet.
+
+We can use a class selector to style the first paragraph of our example 
+page (selectors.html) differently than the rest of them. This could be, 
+for instance, the synopsis of a newspaper article. First, let’s add a 
+class attribute to the desired paragraph.
+
+Now, we can pluck out that <p class='synopsis'> element in our CSS 
+with the following:
+*/
+
+.synopsis {
+    color: #7E8184;  /* light grey */
+    font-style: italic;
+}
+
+/*  MORE USEFUL DIVS
+
+The class attribute isn’t limited to <p> elements—it can be defined on 
+any HTML element. So, armed with CSS class selectors, our generic 
+<div> and <span> boxes from the previous chapter become much, much 
+more useful. We can use them to style both individual elements as well 
+as arbitrary sections of our web page.
+
+*/
+
+.button:link,
+.button:visited {
+    display: block;
+    text-decoration: none;
+
+    color: #FFF;
+    background-color: #5995DA;    /* Blue */
+    font-weight: bold;
+    padding: 20px;
+    text-align: center;
+    border: 2px solid #5D6063;    /* Dark gray */
+    border-radius: 5px;
+
+    width: 200px;
+    margin: 20px auto;
+}
+
+.button:hover,
+.button:visited:hover {
+    color: #FFF;
+    background-color: #76AEED;
+}
+
+.button:active,
+.button:visited:active {
+    color: #FFF;
+    background-color: #5995DA;
+}
+
+.call-to-action:link,
+.call-to-action:visited {
+  font-style: italic;
+  background-color: #EEB75A;     /* Yellow */
+}
+
+.call-to-action:hover,
+.call-to-action:visited:hover {
+  background-color: #F5CF8E;     /* Light yellow */
+}
+
+.call-to-action:active,
+.call-to-action:visited:active {
+  background-color: #EEB75A;     /* Yellow */
+}
+
+/*  CONTAINER DIVS
+
+Remember that <div> doesn’t alter the semantic structure of a page. 
+This makes it a great tool for defining the presentational 
+structure of a web page. By wrapping other HTML elements in <div> 
+tags, we can organize our site into larger layout-oriented chunks 
+without messing up how search engines view our content.
+
+*/
+
+.page {
+    width: 600px;
+    margin: 0 auto;
+}
+
+/*  No matter how you resize the browser window, our web page will 
+always be 600 pixels wide and centered in the available space. 
+Note that this was the exact same way we centered our button, but 
+now we’re doing it to multiple elements at the same time by 
+nesting them in a generic container.  */
+
+/*  REUSING CLASS STYLES  
+
+The same class can be applied to multiple elements in a single HTML 
+document. This means that we can now reuse arbitrary CSS 
+declarations wherever we want. To create another button, all we 
+have to do is add another HTML element with the same class:
+
+<div class='button'>Button One</div>
+<div class='button'>Button Two</div>
+
+If we ever wanted to, say, change the button color, we would only 
+have to do it in one place and all our buttons would 
+automatically update.
+*/
+
+/*  MODIFYING CLASS STYLES
+
+What if we want to alter our second button a little bit? Fortunately, 
+we can apply multiple classes to the same HTML element, too. The 
+styles from each class will be applied to the element, giving us the 
+opportunity to both reuse styles from .button and override some of 
+them with a new class.
+
+Go ahead and add another class to our second button with the 
+following markup. Notice how multiple classes live in the same class 
+attribute, separated by spaces:
+
+<div class='button call-to-action'>Button Two</div>
+
+*/
+
+.call-to-action {
+    font-style: italic;
+    background-color: #EEB758;  /*  Yellow  */
+}
+
+/*  ORDER MATTERS  
+
+There’s a couple of important things going on with our second button now:
+
+    It’s adding a new font-style declaration to the original .button rule.
+    It’s overriding an existing background-color style from .button.
+
+When there’s two conflicting properties in a CSS file, the LAST one is 
+always the one that gets applied. So, if you moved .call-to-action to 
+the top of styles.css, .button would have the final word on the value 
+of background-color, and it would remain blue.
+
+Precedence is determined solely by the order of the rules in styles.css.
+*/
+
+/*  DESCENDANT SELECTORS  
+
+You may have noticed that the <em> in our first paragraph is no longer 
+distinguishable from its surround text, since our .synopsis rule made 
+everything italic.
+
+This is what “descendant selectors” are for. They let you target only 
+those elements that are INSIDE of another element. For example, we 
+can pull out that <em> in the .synopsis paragraph with the following:
+
+*/
+
+.synopsis em {
+    font-style: normal;
+  }
+
+/*  Adding this rule to styles.css will make the <em> display as 
+upright (roman) characters, thus differentiating it from the 
+italics we put on the entire <p> text. The rest of the <em> 
+elements on the page will be unaffected.  
+  
+Descendant selectors aren’t limited to class selectors—you can 
+combine any other group of selectors this way. For instance, 
+if we wanted to select only <em> elements inside of headings, 
+we might use something like this: 
+
+*/
+
+h1 em {
+    /* Some other styles */
+  }
+/*  PSEUDO-CLASSES FOR LINKS  
+
+So far, all the CSS selectors we’ve seen map directly to a 
+piece of HTML markup that we wrote. However, there’s more 
+going on in a rendered web page than just our HTML 
+content. There’s “stateful” information about what the 
+user is doing (opposed to the content we’ve authored).
+
+The classic example is a link. As a web developer, you 
+create an <a href> element. After the browser renders it, 
+the user can interact with that link. They can hover over 
+it, click it, and visit the URL.
+
+CSS “pseudo-classes” provide a mechanism for hooking into 
+this kind of temporary user information. At any given time, 
+an <a href> element can be in a number of different states, 
+and you can use pseudo-classes to style each one of them 
+individually. Think of them as class selectors that you 
+don’t have to write on your own because they’re built into 
+the browser.
+
+Pseudo-classes begin with a colon followed by the name of 
+the desired class. The most common link pseudo-classes are 
+as follows:
+
+    :link – A link the user has never visited.
+    :visited – A link the user has visited before.
+    :hover – A link with the user’s mouse over it.
+    :active – A link that’s being pressed down by a mouse 
+    (or finger).
+
+*/
+
+a:link {
+    color: blue;
+    text-decoration: none;
+}
+
+a:visited {
+    color: purple;
+}
+
+a:hover {
+    color: aqua;
+    text-decoration: underline;
+}
+
+a:active {
+    color: red;
+}
+
+a:visited:hover {
+    color: orange; /* This creates a dedicated hover style for visited links. 
+    Hovering over an unvisited link changes it to aqua, while hovering over a 
+    visited link will turn it orange. Fantastic! Except for the fact that this 
+    breaks our a:active style due to some complicated CSS internals that you’ll 
+    never want to read about. When you click down, our link won’t turn red 
+    anymore. */
+}
+
+a:visited:active {
+    color: red; /* we can fix the above problem by adding the following code */
+}
+
+/* If you’ve never been to the InternetingIsHard.com home page, 
+you should see a blue link. Otherwise, you’ll see a purple 
+link. When you hover over the link, it will turn aqua, and when 
+you push down on it, it’ll turn red. */
+
+
+/*  PSEUDO-CLASSES FOR BUTTON
+
+We’ll be modifying our .button class with pseudo-classes in this 
+section. This will let us create buttons that actually go 
+somewhere.
+
+LINK ELEMENTS NOT DIV ELEMENTS
+
+First, we need change our buttons to be <a href> elements 
+instead of generic <div> elements, as shown below:
+
+<a class='button' href='nowhere.html'>Button One</a>
+<a class='button call-to-action' href='nowhere.html'>Button Two</a>
+
+If you reload this in your browser, you’ll see that we lost 
+some of our styles even though we’re using the same classes. 
+This is because <a> is an inline element by default and 
+also has a default color value.
+
+We need to change it to a block element and remove some of the 
+default style linking.
+
+.button selector above updated
+
+Notice the new :link and :visited pseudo-classes in the selector. 
+Without it, our color would not override the browser’s default 
+a:link style.
+
+*/
+
+/*  PSEUDO-CLASSES FOR STRUCTURE
+
+the :last-of-type pseudo-class selects the final element of a 
+particular type in its parent element. This gives us an 
+alternative to class selectors for selecting specific 
+elements.
+
+For instance, we could use :last-of-type to add some space 
+after the last paragraph of our example page:
+
+*/
+
+p:last-of-type {
+    margin-bottom: 50px;
+  }
+
+/*  We could even use a :first-of-type pseudo-class in place 
+of our .synopsis class. Replacing the existing .synopsis rule 
+with the following snippet should result in the exact same page.
+
+p:first-of-type {
+    color: #7E8184;
+    font-style: italic;
+  }
+
+The :first-of-type and :last-of-type selectors only operate 
+inside their parent element. That is to say, p:first-of-type 
+selects the first <p> in every container element.
+
+The first <p> element in the added <div> will also match 
+p:first-of-type because the pseudo-class’s scope is 
+limited to the parent element.
+
+If you wanted to avoid the sidebar paragraphs and select 
+only the first <p> in our <div class='page'>, you would 
+need to limit its scope using a child selector, like so:
+*/
+
+.page > p:first-of-type {
+    color: #7E8184;
+    font-style: italic;
+  }
+
+/*  ID SELECTORS
+
+“ID selectors” are a more stringent alternative to class 
+selectors. They work pretty much the same way, except you 
+can only have one element with the same ID per page, 
+which means you can’t reuse styles at all. Instead of a 
+class attribute, they require an id attribute on whatever 
+HTML element you’re trying to select.
+
+The corresponding CSS selector must begin with a hash 
+sign (#) opposed to a dot. Adding the following to 
+styles.css will change the text color of our yellow 
+button:
+*/
+
+#button-2 {
+    color: #5D6063;  /* Dark gray */
+  }
+
+/* The problem is, if we wanted to share this style 
+with another button, we’d have to give it another 
+unique id attribute. Pretty soon, our CSS would 
+start to look pretty gnarly:
+
+(This is painful to maintain)
+#button-2,
+#button-3,
+#checkout-button,
+#menu-bar-call-to-action {
+  color: #5D6063;
+}
+
+For this reason, ID selectors are generally frowned 
+upon. Use class selectors instead. 
+
+URL FRAGMENTS
+
+id attributes need to be unique because they serve 
+as the target for “URL fragments”, which we sort of 
+glossed over in our discussion of URLs. Fragments 
+are how you point the user to a specific part of a 
+web page. They look like an ID selector stuck on 
+the end of a URL.
+syntax of a URL: scheme (https://), domain (example.com), 
+path (/selectors.html), fragment (#button-2)
+
+For example, if we wanted to point the user to our 
+second button, we could use the following. Note 
+that we can omit the URL entirely if we’re linking 
+to a different section on the same page:
+
+<!-- From the same page -->
+<a href='#button-2'>Go to Button Two</a>
+
+<!-- From a different page -->
+<a href='selectors.html#button-2'>Go to Button Two</a>
+
+CSS SPECIFICITY
+
+ID selectors have higher specificity than class 
+selectors, so this will turn our second button red 
+even though we try to set the background-color with 
+.call-to-action:link later in our stylesheet. The 
+whole “order matters” concept only works when all 
+your rules have the same specificity.
+
+ex. Four CSS rules. Third one has higher specificity, 
+so fourth one is ignored.
+
+The specificity of selectors we’ve seen in this 
+chapter are show below, from greatest to least:
+
+    #button-2
+    .button:link
+    a:link and .synopsis em (they’re equal)
+    .button
+    a
+
+**The separation of content from presentation helps 
+guide this process. You need content before you can 
+present it, so your first step is usually to mark 
+up your raw content with HTML tags. Once that’s 
+prepared, you’re ready to add class attributes to 
+your elements and style them one-by-one. When you 
+discover a need for some extra structure to create 
+a desired layout (e.g., turn a group of elements 
+into a sidebar), that’s when you start wrapping 
+your content in container <div>’s.
+*/

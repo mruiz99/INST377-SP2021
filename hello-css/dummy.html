@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8'/>
+    <title>Dummy</title>
+    <link rel="stylesheet" href="styles.css"/>
+    <style>  /*  page-specific style, <style> only lives in <head>, will only 
+    change this file and not hello-css.html, this will OVERRIDE the code in 
+    styles.css because it is PAGE-SPECIFIC */
+    
+        /*<p> Want to try crossing out an <a href="nowhere.html" style="color: #990000; text-docoration: line-through";> obsolete link</a>?This is your chance!</p>*/
+        body {
+            color: #0000FF  /* Blue */
+        }
+
+        /*Multiple Stylesheets
+        <!-- All product pages have this -->
+        <head>
+            <link rel='stylesheet' href='styles.css'/>
+            <link rel='stylesheet' href='product.css'/>
+        </head>
+
+        <!-- While all blog posts have this -->
+        <head>
+            <link rel='stylesheet' href='styles.css'/>
+            <link rel='stylesheet' href='blog.css'/>
+        </head>
+
+        The order of the <link/> elements matters. Stylesheets that come later will 
+        override styles in earlier ones. Typically, you’ll put your “base” or “default” 
+        styles in a global stylesheet (styles.css) and supplement them with section-specific 
+        stylesheets (product.css and blog.css). This allows you to organize CSS rules into 
+        manageable files while avoiding the perils of page-specific and inline styles.
+        */
+    </style>
+  </head>
+
+  
+  <body>
+    <h1>Dummy</h1>
+
+    <p>This is a dummy page that helps us demonstrate reusable CSS
+       stylesheets. <a href='hello-css.html'>Go back</a>.</p>
+
+    <p>Want to try crossing out an <a href='nowhere.html'>obsolete link</a>? This
+       is your chance!</p>
+  </body>
+</html>
