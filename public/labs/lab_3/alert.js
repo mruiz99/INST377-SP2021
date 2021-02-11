@@ -530,4 +530,274 @@ otherwise – value2.
 ex.
 
 let accessAllowed = age > 18 ? true : false;
+
+** in the example above, we can do WITHOUT the ? and everything afterwards
+because the comparison itself returns true or false
+
+MULTIPLE "?"
+
+a SEQUENCE of ? operators can return a value that depends on more than one
+condition
+
+let age = prompt('age?', 18);
+
+let message = (age < 3) ? 'Hi, baby!' :
+  (age < 18) ? 'Hello!' :
+  (age < 100) ? 'Greetings!' :
+  'What an unusual age!';
+
+alert( message );
+
+NON-TRADITIONAL USE OF "?"
+
+Sometimes the question mark ? is used as a replacement for if:
+
+let company = prompt('Which company created JavaScript?', '');
+
+(company == 'Netscape') ?
+   alert('Right!') : alert('Wrong.');
+
+depending on the condition, the code will execute the conditions
+either one the left or right, but it is NOT recommended to do
+it this way, mainly because its hard to read
+
+same code below using IF comparison:
+
+let company = prompt('Which company created JavaScript?', '');
+
+if (company == 'Netscape') {
+  alert('Right!');
+} else {
+  alert('Wrong.');
+}
+
+THE NAME OF JAVASCRIPT
+
+let javaName = prompt("What is the 'official' name of JavaScript?", '');
+
+if (javaName == 'ECMAScript') {
+    alert('Right!');
+} else {
+  alert('You don't know?  ECMAScript!');
+}
+
+SHOW THE SIGN
+
+let num = prompt("Whats the number?", '');
+
+if (num == 0) {
+  alert(0);
+} else if (num < 0) {
+  alert(-1);
+} else {
+  alert(1);
+}
+
+REWRITE "IF" INTO "?"
+
+let result;
+
+if (a + b < 4) {
+  result = 'Below';
+} else {
+  result = 'Over';
+}
+
+REWRITTEN:
+
+let result = (a + b < 4) ? 'Below': 'Over';
+
+REWRITE "IF..ELSE" INTO "?"
+
+let message;
+
+if (login == 'Employee') {
+  message = 'Hello';
+} else if (login == 'Director') {
+  message = 'Greetings';
+} else if (login == '') {
+  message = 'No login';
+} else {
+  message = '';
+}
+
+REWRITTEN:
+
+let message = (login == 'Employee') ? 'Hello':
+  (login == 'Director') ? 'Greetings':
+  (login == '') ? 'No login':
+  '';
+
 */
+
+/*
+
+CHAPTER 11 - LOGICAL OPERATORS
+
+four types:  || (OR), && (AND), ! (NOT), ?? (nullish coalescing), can be
+applied to values of ANY type, their result can be of ANY type
+
+|| (OR)
+
+ex.
+
+alert( true || true );   // true
+alert( false || true );  // true
+alert( true || false );  // true
+alert( false || false ); // false
+
+if the operand is NOT a boolean, it is CONVERTED to a boolean for evaluation
+
+ex.
+
+if (1 || 0) { // works just like if( true || false )
+  alert( 'truthy!' );
+}
+
+1 is treated as true, 0 as false
+
+ex.
+
+let hour = 9;
+
+if (hour < 10 || hour > 18) {
+  alert( 'The office is closed.' );
+}
+
+most of the time, || is used in an IF statement to test if ANY
+of the given conditions are true
+
+ex.
+
+let hour = 12;
+let isWeekend = true;
+
+if (hour < 10 || hour > 18 || isWeekend) {
+  alert( 'The office is closed.' ); // it is the weekend
+}
+
+we can test MULTIPLE conditions
+
+if we are given multiple OR values..
+
+ex.
+
+result = value1 || value2 || value3;
+
+OR evaluates operands from LEFT TO RIGHT, converts each to boolean,
+if result is true, stops and returns the original value of that operand
+if ALL operands evaluated to false, the last one is returned
+
+** a value is returned in its ORIGINAL form, without the conversion
+** a chain or OR returns the first truthy value or the last one if none found
+
+ex.
+
+alert( 1 || 0 ); // 1 (1 is truthy)
+
+alert( null || 1 ); // 1 (1 is the first truthy value)
+alert( null || 0 || 1 ); // 1 (the first truthy value)
+
+alert( undefined || null || 0 ); // 0 (all falsy, returns the last value)
+
+SHORT-CIRCUIT EVALUATION
+
+OR processes its arguments until the first truthy value is reached, and then
+the value is returned IMMEDIATELY, without even touching the other argument
+
+ex.
+
+true || alert("not printed");
+false || alert("printed");
+
+in the first line above, the OR operator stops the eval immediately upon seeing
+'true', so the alert is NOT run
+
+&& (AND)
+
+ex.
+
+alert( true && true );   // true
+alert( false && true );  // false
+alert( true && false );  // false
+alert( false && false ); // false
+
+ex.
+
+let hour = 12;
+let minute = 30;
+
+if (hour == 12 && minute == 30) {
+  alert( 'The time is 12:30' );
+}
+
+ex.
+
+if (1 && 0) { // evaluated as true && false
+  alert( "won't work, because the result is falsy" );
+}
+
+just as with OR, ANY value is allowed as an operand of AND
+
+AND "&&" FINDS THE FIRST FALSELY VALUE
+
+ex.
+
+result = value1 && value2 && value3;
+
+AND operators evaluates from left to right, converts each operand to boolean,
+if FALSE, stop and returns ORIGINAL value of that operand
+if all were evaluated (i.e., all truthy), the LAST operand is returned
+
+** AND returns the FIRST falsely value or the last value if NONE were found
+
+ex.
+
+alert( 1 && 0 ); // 0
+alert( 1 && 5 ); // 5
+
+// if the first operand is falsy,
+// AND returns it. The second operand is ignored
+alert( null && 5 ); // null
+alert( 0 && "no matter what" ); // 0
+
+ex.
+
+alert( 1 && 2 && null && 3 ); // null
+
+alert( 1 && 2 && 3 ); // 3, the last one
+
+** PRECEDENCE of AND is HIGHER than OR
+
+! (NOT)
+
+ex.
+
+result = !value;
+
+the operator accepts a SINGLE value, converts operand to boolean type,
+returns the INVERSE value
+
+ex.
+
+alert( !true ); // false
+alert( !0 ); // true
+
+we sometimes use a double NOT to convert a value to a boolean type
+
+ex.
+
+alert( !!"non-empty string" ); // true
+alert( !!null ); // false
+
+but this can also be done with Boolean function..
+
+ex.
+
+alert( Boolean("non-empty string") ); // true
+alert( Boolean(null) ); // false
+
+** PRECEDENCE of ! (NOT) is the HIGHEST of all the logical operators
+
+*/
+
