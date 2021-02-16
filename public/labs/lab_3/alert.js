@@ -247,7 +247,7 @@ have HIGHEST precendence
 ASSIGNMENT
 
 an assignment = is also an operator but has very low precedence, so assigning a
-variable will take place AFTER caluclations are completed
+variable will take place AFTER calculations are completed
 
 ex.
 
@@ -385,7 +385,7 @@ alert( 'Z' > 'A' ); // true
 alert( 'Glow' > 'Glee' ); // true
 alert( 'Bee' > 'Be' ); // true
 
-he algorithm to compare two strings is simple:
+the algorithm to compare two strings is simple:
 
     Compare the first character of both strings.
     If the first character from the first string is greater (or less) than 
