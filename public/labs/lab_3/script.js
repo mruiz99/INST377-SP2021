@@ -1,20 +1,21 @@
-/* NOT MY CODE, I will work on submitting my own code, I didn't leave myself enough time to do this
-*/
-let width = 130;
-let count = 3;
-
-let list = carousel.querySelector('ul');
-let listElems = carousel.querySelectorAll('li');
-
-let position = 0;
-carousel.querySelector('.previous').onclick = function() {
-    position += width * count;
-    position = Math.min(position, 0)
-    list.style.marginLeft = position + 'px';
-};
-
-carousel.querySelector('.next').onclick = function() {
-    position -= width * count;
-    position = Math.max(position, -width * (listElems.length - count));
-    list.style.marginLeft = position + 'px';
-};
+const carouselImages = document.querySelector('.gallery');
+const carouselButtons = document.querySelectorAll('.arrow');
+const numberOfImages = document.querySelectorAll('.gallery img').length;  
+let imageIndex = 1;
+let translateX = 0;
+carouselButtons.forEach((button) => {
+  button.addEventListener('click', (event) => {
+    if (event.target.id === 'prev') {
+      if (imageIndex !== 1) {
+        imageIndex -= 3;
+        translateX += 390;
+      }
+    } else {
+      if (imageIndex !== numberOfImages) {
+        imageIndex += 3;
+        translateX -= 390;
+      }
+    }
+    carouselImages.style.transform = `translateX(${translateX}px)`;
+    });
+  });
