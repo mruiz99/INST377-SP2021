@@ -1,13 +1,16 @@
 body {
   padding: 10px;
+  background-color: hotpink;
 }
-  
+
 .carousel {
   position: relative;
   align-items: center;
   overflow: hidden;
-  width: 390px;
+  width: 297px;
   background: #eee;
+  margin: auto;
+
 }
 
 img {

@@ -8,12 +8,12 @@ carouselButtons.forEach((button) => {
     if (event.target.id === 'prev') {
       if (imageIndex !== 1) {
         imageIndex -= 3;
-        translateX += 390;
+        translateX += 297;
       }
     } else {
       if (imageIndex !== numberOfImages) {
         imageIndex += 3;
-        translateX -= 390;
+        translateX -= 297;
       }
     }
     carouselImages.style.transform = `translateX(${translateX}px)`;
