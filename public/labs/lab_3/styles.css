@@ -1,52 +1,51 @@
 body {
-    padding: 10px;
-  }
+  padding: 10px;
+}
   
 .carousel {
-position: relative;
-align-items: center;
-overflow: hidden;
-width: 390px;
-background: #eee;
+  position: relative;
+  align-items: center;
+  overflow: hidden;
+  width: 390px;
+  background: #eee;
 }
 
 img {
-border-radius: 5px;
+  border-radius: 5px;
 }
 
 .gallery {
-display: flex;
-transform: translateX(0);
-transition: transform 0.25s
+  display: flex;
+  transform: translateX(0);
+  transition: transform 0.25s
 }
 
 .arrow {
-position: absolute;
-top: 40%;
-padding: 0;
-background: #ddd;
-border-radius: 15px;
-border: 1px solid gray;
-font-size: 24px;
-line-height: 24px;
-color: #444;
-z-index: 1;
-
+  position: absolute;
+  top: 40%;
+  padding: 0;
+  background: #ddd;
+  border-radius: 15px;
+  border: 1px solid gray;
+  font-size: 24px;
+  line-height: 24px;
+  color: #444;
+  z-index: 1;
 }
 
 .arrow:focus {
-outline: none;
+  outline: none;
 }
 
 .arrow:hover {
-background: #ccc;
-cursor: pointer;
+  background: #ccc;
+  cursor: pointer;
 }
 
 .prev {
-left: 7px;
+  left: 7px;
 }
 
 .next {
-right: 7px;
+  right: 7px;
 }
