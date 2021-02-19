@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8'/>
+    <title>Speaker Submission</title>
+    <link rel='stylesheet' href='styles.css'/>
+  </head>
+  <body>
+    <header class='speaker-form-header'>
+        <form action='' method='get' class='speaker-form'>
+            <!--general rule of thumb is to use POST when you’re 
+            changing data on the server, reserving GET for when 
+            you’re only getting data.
+        
+            By leaving the action attribute blank, we’re telling 
+            the form to submit to the same URL. Combined with the 
+            GET method, this will let us inspect the contents of 
+            the form.-->
+            <div class='form-row'>
+                <label for='full-name'>Name</label>
+                <input id='full-name' name='full-name' type='text'/>
+                <!--A label’s FOR attribute must match the ID 
+                    attribute of its associated <input/> element.
+                    The ID attribute here is only for connecting 
+                    it to a <label> element.
+                -->
+            </div>
+        </form>
+      <h1>Speaker Submission</h1>
+      <p><em>Want to speak at our fake conference? Fill out
+        this form.</em></p>
+    </header>
+  </body>
+</html>
