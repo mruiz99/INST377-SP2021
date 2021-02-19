@@ -50,7 +50,8 @@ body {
     flex-wrap: wrap;
   }
   
-  .form-row input[type='text'] {
+  .form-row input[type='text'],
+  .form-row input[type='email'] {
     background-color: #FFFFFF;
     border: 1px solid #D6D9DC;
     border-radius: 3px;
@@ -63,6 +64,27 @@ body {
     margin-bottom: 15px;
   }
 
+  /* TEXT AREA */
+
+  .form-row textarea {
+    font-family: "Helvetica", "Arial", sans-serif;
+    font-size: 14px;
+  
+    border: 1px solid #D6D9DC;
+    border-radius: 3px;
+  
+    min-height: 200px;
+    margin-bottom: 10px;
+    padding: 7px;
+    resize: none;
+  }
+  
+  .form-row .instructions {
+    color: #999999;
+    font-size: 14px;
+    margin-bottom: 30px;
+  }
+
   @media only screen and (min-width: 700px) {
     .speaker-form-header,
     .speaker-form {
@@ -73,14 +95,126 @@ body {
       align-items: flex-start; /* To avoid stretching */
       margin-bottom: 20px;
     }
-    .form-row input[type='text'] {
+    .form-row input[type='text'], 
+    .form-row input[type='email'],    /* Add */
+    .form-row select,                 /* These */
+    .form-row textarea {              /* Selectors */
       width: 250px;
       height: initial;
     }
+
     .form-row label {
       text-align: right;
       width: 120px;
       margin-top: 7px;
       padding-right: 20px;
     }
+
+    /* For the desktop layout, we need to make the <legend> line 
+    up with the <label> elements in the previous section (hence the 
+    width: 120px line), and we need to float everything to the left 
+    so they appear on the same line. */
+
+    .legacy-form-row {
+      margin-bottom: 10px;
+    }
+
+    .legacy-form-row legend {
+      width: 120px;
+      text-align: right;
+      padding-right: 20px;
+    }
+
+    .legacy-form-row legend {
+      float: left;
+    }
+
+    /* moving the .instructions <div> undernearth <textarea>*/
+
+    .form-row .instructions {
+      margin-left: 120px;
+    }
+
+    /* we have to take into account the 120px label column */
+
+    .form-row .checkbox-label {
+      margin-left: 120px;
+      width: auto;
+    }
+
+    /* we have to take into account the 120px label column */
+
+    .form-row button {
+      margin-left: 120px;
+    }
   }
+
+.form-row input[type='text']:invalid,
+.form-row input[type='email']:invalid {
+  border: 1px solid #D55C5F;
+  color: #D55C5F;
+  box-shadow: none; /* Remove default red glow in Firefox */
+  /* Since we can now have a “right” and a “wrong” input value, 
+  we should probably convey that to users. The :invalid and 
+  :valid pseudo-classes let us style these states independently.*/
+}
+
+.legacy-form-row {
+  border: none;
+  margin-bottom: 40px;
+}
+
+.legacy-form-row legend {
+  margin-bottom: 15px;
+}
+
+.legacy-form-row .radio-label {
+  display: block;
+  font-size: 14px;
+  padding: 0 20px 0 10px;
+}
+
+.legacy-form-row input[type='radio'] {
+  margin-top: 2px;
+}
+  
+.legacy-form-row .radio-label,
+.legacy-form-row input[type='radio'] {
+  float: left;
+}
+
+/* DROP DOWN TSHIRT MENU */
+.form-row select {
+  width: 100%;
+  padding: 5px;
+  font-size: 14px;            /* This won't work in Chrome or Safari */
+}
+
+/* For the mobile layout, all we need to do is override the 
+margin-bottom that we put on the rest the <label> elements.*/
+.form-row .checkbox-label {
+  margin-bottom: 0;
+}
+
+/* changing default SUBMIT button */
+.form-row button {
+  font-size: 16px;
+  font-weight: bold;
+
+  color: #FFFFFF;
+  background-color: #5995DA;
+
+  border: none;
+  border-radius: 3px;
+
+  padding: 10px 40px;
+  cursor: pointer;
+}
+
+.form-row button:hover {
+  background-color: #76AEED;
+}
+
+.form-row button:active {
+  background-color: #407FC7;
+}
