@@ -1,0 +1,52 @@
+body {
+    font: normal 18px/1.5 "Fira Sans", "Helvetica Neue", sans-serif;
+    background: blue;
+    color: #fff;
+    padding: 50px 0;
+  }
+
+h1 {
+    text-align: center;
+}
+
+.flex-outer li,
+.flex-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  color: black;
+
+}
+
+.flex-outer > li > label,
+.flex-outer li p {
+  flex: 1 0 120px;
+  max-width: 320px;
+
+}
+ 
+.flex-outer > li > label + *,
+.flex-inner {
+  flex: 1 0 220px;
+}
+
+.flex-outer li button {
+    margin-left: 0;
+    padding: 8px 16px;
+    border-style: solid;
+    background: white;
+    color: black;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: .09em;
+    border-radius: 2px;
+  }
+
+.flex-inner li {
+    width: 100px;
+}
+
+.flex-inner {
+    justify-content: space-between;
+    /*width: 50%;*/
+  }
