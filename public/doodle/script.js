@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     isGoingRight = false
     let leftTimerId
     let rightTimerId
+    let score = 0
         
 
     function createDoodler() { // a function to create the doodler
@@ -70,6 +71,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 platform.bottom -= 4 // each of the platforms move down by 4 each time
                 let visual = platform.visual
                 visual.style.bottom = platform.bottom + 'px'
+
+                if (platform.bottom < 10) { // if any of the platforms are near the bottom
+                    //of the  grid
+                    let firstPlatform = platforms[0].visual
+                    firstPlatform.classList.remove('platform')
+                    platforms.shift()  // removes the first item in an array
+                    score++
+                    let newPlatform = new Platform(600)
+                    platforms.push(newPlatform)
+
+                }
             })
         }
     }
@@ -116,8 +128,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function gameOver() {
         isGameOver = true
+        while (grid.firstChild) {
+            grid.removeChild(grid.firstChild)
+        }
+        grid.innerHTML = score
         clearInterval(upTimerId)
         clearInterval(downTimerId)
+        clearInterval(rightTimerId)
+        clearInterval(leftTimerId)
     }
 
     function control(e) {
@@ -126,29 +144,46 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (e.key === "ArrowRight") {
             moveRight()
         } else if (e.key === "ArrowUp") {
-            //move straight
+            moveStraight()
         }
     }
 
     function moveLeft() {
+        if (isGoingLeft) {
+            clearInterval(rightTimerId)
+            isGoingRight = false
+        }
         isGoingLeft = true
         leftTimerId = setInterval(function () {
             if (doodlerLeftSpace >= 0) {
                 doodlerLeftSpace -= 5
                 doodler.style.left = doodlerLeftSpace + 'px'
             } else moveRight()
-        }, 30)
+        }, 20)
     }
 
     function moveRight() {
-        isGoingRight = true
+        if (isGoingLeft) {
+            clearInterval(leftTimerId)
+            isGoingLeft = false
+        }
+        isGoingRight = false
         rightTimerId = setInterval(function () {
             if(doodlerLeftSpace <= 340) {
                 doodlerLeftSpace += 5
                 doodler.style.left = doodlerLeftSpace + 'px'
             } else moveLeft()
-        }, 30)
+        }, 20)
     }
+
+    function moveStraight() {
+        isGoingRight = false
+        isGoingLeft = false
+        clearInterval(rightTimerId)
+        clearInterval(leftTimerId)
+    }
+
+
 
     function start() { // we will only summon doodler if the game is NOT over
         if(!isGameOver) { 
