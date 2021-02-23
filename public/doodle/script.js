@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const grid = document.querySelector('.grid') // grab the grid class
     const doodler = document.createElement('div') // create a DIV for the doodler
     let doodlerLeftSpace = 50
-    let doodlerBottomSpace = 150
+    let doodlerBottomSpace = 250
     let platformCount = 5
     let isGameOver = false
     let platforms = []
@@ -99,6 +99,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     (doodlerLeftSpace <= (platform.left + 85)) &&
                     !isJumping
                 )
+                {
+                    console.log('landed')
+                    jump()
+                }
             })
 
         }, 30)
