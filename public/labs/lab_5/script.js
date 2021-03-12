@@ -38,7 +38,7 @@ async function dataHandler(mapObjectFromFunction) {
   }
 
   function findMatches(wordToMatch, data) {
-    console.log("FINDMATCHES");
+    console.log('FINDMATCHES');
     return data.filter(place => {
       // here we need to figure out if the zipcode 		
       // MATCHES what was searched
@@ -50,40 +50,35 @@ async function dataHandler(mapObjectFromFunction) {
   
 
   form.addEventListener('submit', async (event) => { 
-    if (event.target.value.length > 0) {
-      console.log("HELLO");
-      const matchArray = findMatches(event.target.value, data);
-      const html = matchArray.map(place => {
-        const regex = new RegExp(event.target.value, 'gi');
-        const zipCode = place.zip.replace(regex, '<span class="hl">${event.target.value}</span>');
-        return `
+    const matchArray = findMatches(event.target.value, data);
+    console.log(matchArray);
+    const html = matchArray.map(place => {
+      const regex = new RegExp(event.target.value, 'gi');
+      const zipCode = place.zip.replace(regex, '<span class="hl">${event.target.value}</span>');
+      return `
+      
+        <address class="results">
+            <li>
+                <span class="name">${place.name}</span>
+            </li>
+            <li>
+                <span class="category">${place.category}</span>
+            </li>
+            <li>
+                <span class="address">${place.address_line_1}</span>
+            </li>
+            <li>
+                <span class="name">${place.city}, ${place.state}</span>
+            </li>
+            <li>
+                <span class="zipcode">${place.zip}</span>
+            </li>
+        </address>
         
-          <address class="results">
-              <li>
-                  <span class="name">${place.name}</span>
-              </li>
-              <li>
-                  <span class="category">${place.category}</span>
-              </li>
-              <li>
-                  <span class="address">${place.address_line_1}</span>
-              </li>
-              <li>
-                  <span class="name">${place.city}, ${place.state}</span>
-              </li>
-              <li>
-                  <span class="zipcode">${place.zip}</span>
-              </li>
-          </address>
-          
-          `;
-      }).join('');
-      console.log("SUGGESTIONS");
-      suggestions.innerHTML = html;
-  } else {
-      suggestions.innerHTML = "";
-      console.log("ELSE");
-  }
+        `;
+    }).join('');
+    console.log('SUGGESTIONS');
+    suggestions.innerHTML = html;
   });
 }
 
