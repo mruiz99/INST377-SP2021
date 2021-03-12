@@ -8,7 +8,6 @@ function mapInit() {
     zoomOffset: -1,
     accessToken: 'pk.eyJ1IjoibXJ1aXo5OSIsImEiOiJja201M2dyNGgwYW5hMnVvNXFnNWh3c3RqIn0.tt500DzwIpYLLCs1gsWrrQ'
   }).addTo(mymap);
-  //const marker = L.marker([38.7849, -76.8721]).addTo(mymap)
 
   return mymap;
 }
@@ -19,27 +18,28 @@ async function dataHandler(mapObjectFromFunction) {
   const submit = document.querySelector('#submit');
   const suggestions = document.querySelector('.suggestions');
 
-  const result = [];
-  const request = await fetch('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json');
+  const request = await fetch('/api');
   const data = await request.json();
 
   search.addEventListener('input', (event) => {
     console.log('input', event.target.value);
   })
 
-  function unique(arr) {
-    for (let thing of arr) {
-      if (!result.includes(thing)) {
-        result.push(thing);
-      }
-    }
-  
-    return result;
+  function panning(arr) {
+    const test = [arr.geocoded_column_1.coordinates[1], arr.geocoded_column_1.coordinates[0]];
+    return test;
+  }
+
+  function markers(param) {
+    const geocode = param;
+    const coords = geocode['coordinates'];
+    const newCoords = [coords[1], coords[0]];
+    const marker = L.marker(newCoords);
+    return marker;
   }
 
   function findMatches(wordToMatch, data) {
-    console.log('FINDMATCHES');
-    return data.filter(place => {
+    return data.filter( (place) => {
       // here we need to figure out if the zipcode 		
       // MATCHES what was searched
       const regex = new RegExp(wordToMatch, 'gi');
@@ -47,39 +47,54 @@ async function dataHandler(mapObjectFromFunction) {
       return place.zip.match(regex);
     });
   }
-  
 
-  form.addEventListener('submit', async (event) => { 
-    const matchArray = findMatches(event.target.value, data);
-    console.log(matchArray);
-    const html = matchArray.map(place => {
-      const regex = new RegExp(event.target.value, 'gi');
-      const zipCode = place.zip.replace(regex, '<span class="hl">${event.target.value}</span>');
-      return `
-      
-        <address class="results">
-            <li>
-                <span class="name">${place.name}</span>
-            </li>
-            <li>
-                <span class="category">${place.category}</span>
-            </li>
-            <li>
-                <span class="address">${place.address_line_1}</span>
-            </li>
-            <li>
-                <span class="name">${place.city}, ${place.state}</span>
-            </li>
-            <li>
-                <span class="zipcode">${place.zip}</span>
-            </li>
-        </address>
-        
-        `;
-    }).join('');
-    console.log('SUGGESTIONS');
-    suggestions.innerHTML = html;
-  });
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault(); 
+    let matchArray = findMatches(search.value, data);
+    const first = matchArray[0];
+    if (matchArray.length >= 5) {
+      const newArray = matchArray.filter( (record) => record.geocoded_column_1).slice(0,5);
+      matchArray = newArray;
+    } else {
+      const newArray2 = matchArray.filter( (record) => record.geocoded_column_1);
+      matchArray = newArray2;
+    }
+
+    if (search.value.length > 0) {
+      const html = matchArray.map( (place) => {
+        const regex = new RegExp(search.value, 'gi');
+        const zipCode = place.zip.replace(regex, '<span class="hl">${event.target.value}</span>');
+        const allMarkers = markers(place.geocoded_column_1).addTo(mapObjectFromFunction);
+
+        return `
+          <address class="results">
+              <li>
+                  <span class="name">${place.name}</span>
+              </li>
+              <li>
+                  <span class="category">${place.category}</span>
+              </li>
+              <li>
+                  <span class="address">${place.address_line_1}</span>
+              </li>
+              <li>
+                  <span class="name">${place.city}, ${place.state}</span>
+              </li>
+              <li>
+                  <span class="zipcode">${place.zip}</span>
+              </li>
+          </address>
+          
+          `;
+      }).join('');
+      console.log('SUGGESTIONS');
+      suggestions.innerHTML = html;
+      const testing2 = L.map('mapid').panTo(panning(first)).addTo(mapObjectFromFunction);
+  } else {
+      console.log("AHH");
+      suggestions.innerHTML = "";
+  }
+  })
 }
 
 async function windowActions() {
