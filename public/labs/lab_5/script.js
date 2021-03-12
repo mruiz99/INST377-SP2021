@@ -78,7 +78,7 @@ async function dataHandler(mapObjectFromFunction) {
                   <span class="address">${place.address_line_1}</span>
               </li>
               <li>
-                  <span class="name">${place.city}, ${place.state}</span>
+                  <span class="loc">${place.city}, ${place.state}</span>
               </li>
               <li>
                   <span class="zipcode">${place.zip}</span>
@@ -94,6 +94,12 @@ async function dataHandler(mapObjectFromFunction) {
       console.log("AHH");
       suggestions.innerHTML = "";
   }
+  })
+
+  search.addEventListener('input', (event) => {
+    if (event.target.value.length === 0) {
+      suggestions.innerHTML = "";
+    }
   })
 }
 

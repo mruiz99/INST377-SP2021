@@ -39,5 +39,17 @@ li {
 }
 
 .results {
-    background-color: blue;
+    background-image: linear-gradient( orange, yellow);
+    margin-top: 15px;
+    font-family: fantasy;
+    color: black;
+}
+
+.results .zipcode {
+    font-weight: bold;
+    font-size: larger;
+}
+
+.results .name {
+    color: red;
 }
