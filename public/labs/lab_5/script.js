@@ -65,7 +65,7 @@ async function dataHandler(mapObjectFromFunction) {
         const regex = new RegExp(search.value, 'gi');
         const zipCode = place.zip.replace(regex, '<span class="hl">${event.target.value}</span>');
         const allMarkers = markers(place.geocoded_column_1).addTo(mapObjectFromFunction);
-
+        mapObjectFromFunction.panTo(panning(first));
         return `
           <address class="results">
               <li>
