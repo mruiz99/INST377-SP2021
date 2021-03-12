@@ -72,19 +72,9 @@ async function dataHandler(mapObjectFromFunction) {
                   <span class="name">${place.name}</span>
               </li>
               <li>
-                  <span class="category">${place.category}</span>
-              </li>
-              <li>
-                  <span class="address">${place.address_line_1}</span>
-              </li>
-              <li>
-                  <span class="loc">${place.city}, ${place.state}</span>
-              </li>
-              <li>
                   <span class="zipcode">${place.zip}</span>
               </li>
           </address>
-          
           `;
       }).join('');
       console.log('SUGGESTIONS');
