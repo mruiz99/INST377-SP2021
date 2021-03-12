@@ -25,13 +25,19 @@ h2 {
 
 }
 
-.fclass {
-    width: auto; 
-    background-color:white; 
-    height: 50px;
-    justify-content: center;
+.userform .zip {
+    height: 30px;
+    width: 100%;
+}
+
+.userform #submit {
+    height: 30px;
 }
 
 li { 
     font-size: 18px;
+}
+
+.results {
+    background-color: blue;
 }
