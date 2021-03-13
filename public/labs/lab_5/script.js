@@ -21,10 +21,6 @@ async function dataHandler(mapObjectFromFunction) {
   const request = await fetch('/api');
   const data = await request.json();
 
-  search.addEventListener('input', (event) => {
-    console.log('input', event.target.value);
-  })
-
   function panning(arr) {
     const test = [arr.geocoded_column_1.coordinates[1], arr.geocoded_column_1.coordinates[0]];
     return test;
@@ -65,23 +61,20 @@ async function dataHandler(mapObjectFromFunction) {
         const regex = new RegExp(search.value, 'gi');
         const zipCode = place.zip.replace(regex, '<span class="hl">${event.target.value}</span>');
         const allMarkers = markers(place.geocoded_column_1).addTo(mapObjectFromFunction);
-        mapObjectFromFunction.panTo(panning(first));
         return `
-          <address class="results">
+              <div class="column" style="background-color: green;"></div>
               <li>
                   <span class="name">${place.name}</span>
               </li>
               <li>
                   <span class="zipcode">${place.zip}</span>
               </li>
-          </address>
+              <div class="column" style="background-color: green;"></div>
           `;
       }).join('');
-      console.log('SUGGESTIONS');
       suggestions.innerHTML = html;
-      const testing2 = L.map('mapid').panTo(panning(first)).addTo(mapObjectFromFunction);
+      mapObjectFromFunction.panTo(panning(first));
   } else {
-      console.log("AHH");
       suggestions.innerHTML = "";
   }
   })

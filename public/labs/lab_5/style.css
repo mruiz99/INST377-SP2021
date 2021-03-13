@@ -4,7 +4,7 @@ html {
 
 .columns {
     display: flex;
-    margin-top: 50px;
+    margin-top: 20px;
 }
 
 h1 {
@@ -38,18 +38,18 @@ li {
     font-size: 18px;
 }
 
-.results {
+.suggestions {
     background-image: linear-gradient( orange, yellow);
-    margin-top: 15px;
     font-family: fantasy;
     color: black;
 }
 
-.results .zipcode {
+.suggestions .zipcode {
     font-weight: bold;
     font-size: larger;
 }
 
-.results .name {
+.suggestions .name {
     color: red;
+
 }
