@@ -4,7 +4,7 @@ html {
 
 .columns {
     display: flex;
-    margin-top: 20px;
+    margin-top: 50px;
 }
 
 h1 {
@@ -16,6 +16,7 @@ h1 {
 
 h2 {
     color: whitesmoke;
+    margin-bottom: 20px;
     
 }
 
@@ -44,12 +45,18 @@ li {
     color: black;
 }
 
-.suggestions .zipcode {
+.suggestions .address {
     font-weight: bold;
-    font-size: larger;
+    font-size:large;
+    font-style: italic;
 }
 
 .suggestions .name {
+    font-size: x-large;
     color: red;
 
+}
+
+#search {
+    color: whitesmoke;
 }
